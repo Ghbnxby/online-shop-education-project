@@ -39,6 +39,11 @@ public class Product {
     @Size(min = 3, max = 50)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY,optional = true,
+            cascade = CascadeType.ALL)
+    @JoinTable(name = "product2category",
+    joinColumns = @JoinColumn(name = "id_product"),
+            inverseJoinColumns = @JoinColumn(name = "id_category"))
     private Category category;
 
     public Product() {    }
@@ -49,13 +54,14 @@ public class Product {
         this.title = title;
     }
 
-    public Product(String title, String code, double price, byte[] image, Date createDate, boolean active) {
+    public Product(String title, String code, double price, byte[] image, Date createDate, boolean active, Category category) {
         this.title = title;
         this.code = code;
         this.price = price;
         this.image = image;
         this.createDate = createDate;
         this.active = active;
+        this.category = category;
     }
 
     public long getId() {

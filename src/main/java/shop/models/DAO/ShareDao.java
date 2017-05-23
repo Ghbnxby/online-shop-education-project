@@ -1,10 +1,13 @@
 package shop.models.DAO;
 
-import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 
-@Repository
-@Transactional
-public interface ShareDao {
+public interface ShareDao<K,T> {
+    void save(K entity);
+
+    void delete(K entity);
+
+    K getById(T id);
+
+    void update(K entity);
 }

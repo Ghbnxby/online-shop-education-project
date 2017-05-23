@@ -1,10 +1,18 @@
 package shop.models.DAO;
 
-import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 
-@Repository
-@Transactional
-public interface AdminDao {
+
+public interface AdminDao<K,T> {
+
+    void save(K entity);
+
+     void delete(K entity);
+
+     K getByLoginAndPassword (String login, String password);
+
+     K getById(T id);
+
+     void update(K entity);
+
 }
