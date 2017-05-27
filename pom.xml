@@ -7,19 +7,17 @@
 
   <groupId>shop</groupId>
   <artifactId>online-shop-education-project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-
-  <name>online-shop-education-project</name>
-  <description>Use MySQL in Spring Boot web application with Hibernate</description>
+    <description>online-shop</description>
+  <url>http://projects.spring.io/spring-boot/</url>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.2.3.RELEASE</version>
-    <relativePath />
-  </parent>
+    <version>1.4.3.RELEASE</version>
+      </parent>
 
   <dependencies>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -28,16 +26,28 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-freemarker</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
+
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
+
   </dependencies>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <start-class>shop.Application</start-class>
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
   </properties>
 
   <build>
@@ -45,6 +55,16 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <executable>true</executable>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+            <useSystemClassLoader>false</useSystemClassLoader>
+        </configuration>
       </plugin>
     </plugins>
   </build>

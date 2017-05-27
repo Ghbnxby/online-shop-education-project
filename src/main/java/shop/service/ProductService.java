@@ -1,12 +1,13 @@
-package shop.models.DAO;
-
+package shop.service;
 
 import shop.models.entity.Product;
 
 import java.util.List;
 
-public interface ProductDao<K,T> {
-
+/**
+ * Created by toshiba_admin on 23.05.2017.
+ */
+public interface ProductService<K,T> {
     void save(K entity);
 
     void delete(K entity);
@@ -20,7 +21,4 @@ public interface ProductDao<K,T> {
     void update(K entity);
 
     List<K> listProducts();
-
-
-
 }

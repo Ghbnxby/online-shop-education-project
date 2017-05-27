@@ -50,9 +50,8 @@ public class CategoryDaoImpl implements CategoryDao<Category, Long> {
     @Override
     @SuppressWarnings("unchecked")
     public List<Product> getProductsbyCategory(Category category) {
-        List<Product> productList = getSession().createQuery("from Product where category = :category")
+       return  (List<Product>)  getSession().createQuery("from Product where category = :category")
                 .setParameter("category", category).list();
 
-        return productList;
     }
 }

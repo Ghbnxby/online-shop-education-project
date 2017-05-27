@@ -5,16 +5,35 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import shop.controllers.AdminController;
+import shop.models.DAO.AdminDao;
+import shop.models.DAO.AdminDaoImpl;
+import shop.models.DAO.ProductDaoImpl;
+import shop.models.DAO.ShareDaoImpl;
+import shop.service.*;
 
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
+
+//  @Value("${spring.mvc.view.prefix}")
+//  public String PREFIX;
+//
+//  @Value("${spring.mvc.view.suffix}")
+//  public String SUFFIX;
+
 
   @Value("${db.driver}")
   private String DB_DRIVER;
@@ -39,6 +58,8 @@ public class DatabaseConfig {
 
   @Value("${entitymanager.packagesToScan}")
   private String ENTITYMANAGER_PACKAGES_TO_SCAN;
+
+
   
   @Bean
   public DataSource dataSource() {
@@ -64,12 +85,33 @@ public class DatabaseConfig {
     return sessionFactoryBean;
   }
 
-  @Bean
-  public HibernateTransactionManager transactionManager() {
-    HibernateTransactionManager transactionManager = 
-        new HibernateTransactionManager();
-    transactionManager.setSessionFactory(sessionFactory().getObject());
-    return transactionManager;
+
+
+  /*@Bean(name = "internalResourceViewResolver")
+  public InternalResourceViewResolver setupViewResolver()  {
+    InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
+    resolver.setPrefix(PREFIX);
+    resolver.setSuffix(SUFFIX);
+    resolver.setViewClass(JstlView.class);
+
+    return resolver;
+  }*/
+
+
+
+  @Bean(name = "adminService")
+  public AdminService getAdminService() {
+    return new AdminServiceImpl(new AdminDaoImpl());
+  }
+
+  @Bean(name = "productService")
+  public ProductService getProductService() {
+    return new ProductServiceImpl(new ProductDaoImpl());
+  }
+
+  @Bean(name = "shareService")
+  public ShareService getShareService() {
+    return new ShareServiceImpl(new ShareDaoImpl());
   }
 
 } // class DatabaseConfig

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import shop.models.entity.Category;
 import shop.models.entity.Product;
+import shop.models.entity.Share;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -58,6 +60,13 @@ public class ProductDaoImpl implements ProductDao<Product,String> {
         return;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Product> listProducts() {
+
+        return  getSession().createQuery("from Product").list();
+
+    }
 
 
 

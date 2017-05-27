@@ -8,6 +8,7 @@ import shop.models.entity.Product;
 import shop.models.entity.Share;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -44,5 +45,13 @@ public class ShareDaoImpl implements ShareDao<Share, Long> {
 
         getSession().update(share);
         return;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Share> listShare() {
+
+        return  getSession().createQuery("from Share").list();
+
     }
 }

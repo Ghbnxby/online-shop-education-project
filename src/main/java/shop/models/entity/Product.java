@@ -120,7 +120,7 @@ public class Product {
         this.category = category;
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
