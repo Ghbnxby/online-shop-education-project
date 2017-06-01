@@ -15,7 +15,6 @@ public class Category {
     private long id;
 
     @NotNull
-    @Size(min = 3, max = 50)
     private String title;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)

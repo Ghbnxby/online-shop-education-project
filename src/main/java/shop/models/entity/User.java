@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="Admin")
-public class Admin {
+@Table(name="User")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,16 +27,16 @@ public class Admin {
 
 
 
-    public Admin() {}
+    public User() {}
 
-    public Admin(long id) {this.id = id; }
+    public User(long id) {this.id = id; }
 
-    public Admin(String login, String password) {
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
     }
 
-    public Admin(String login, String password, String fullname) {
+    public User(String login, String password, String fullname) {
         this.login = login;
         this.password = password;
         this.fullname = fullname;

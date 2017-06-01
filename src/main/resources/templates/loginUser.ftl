@@ -1,7 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+
 <html>
 <head>
     <title>Admin Page</title>
@@ -15,23 +12,23 @@
 <body>
 
 <h1>Login </h1>
-<form:form method="post" action="/admin/login">
+<form method="post" action="/admin/login">
     <table >
 
         <tr>
             <td>Login :</td>
-            <td><form:input path="login" /></td>
+            <td><input type="text" name="login" value=""></td>
         </tr>
         <tr>
             <td>Password :</td>
-            <td><form:input path="password" /></td>
+            <td><input type="password" name="password" value=""></td>
         </tr>
         <tr>
             <td> </td>
             <td><input type="submit" value="Enter" /></td>
         </tr>
     </table>
-</form:form>
+</form>
 
 <br/>
 

@@ -1,25 +1,26 @@
 package shop.models.DAO;
 
-
 import shop.models.entity.Product;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-public interface ProductDao<K,T> {
 
-    void save(K entity);
+public interface ProductDao{
 
-    void delete(K entity);
+    void save(Product entity);
 
-    K getByCode (T code);
+    void delete(Product entity);
 
-    K getByTitle (T title);
+    Product getByCode (String code);
 
-    K getById(long id);
+    Product getByTitle (String title);
 
-    void update(K entity);
+    Product getById(long id);
 
-    List<K> listProducts();
+    void update(Product entity);
+
+    List<Product> listProducts();
 
 
 

@@ -11,8 +11,8 @@ Message: ${message}
 
 <br/>
 
-<a href="login.ftl">Sign in to your account</a>
-<a href="save.ftl">Register</a>
+<a href="loginUser">Sign in to your account</a>
+<a href="saveUser">Register</a>
 </body>
 
 </html>

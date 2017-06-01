@@ -3,7 +3,7 @@ package shop.models.DAO;
 
 
 
-public interface AdminDao<K,T> {
+public interface UserDao<K,T> {
 
     void save(K entity);
 

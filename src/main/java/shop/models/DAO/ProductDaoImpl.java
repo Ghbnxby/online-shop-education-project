@@ -13,13 +13,15 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ProductDaoImpl implements ProductDao<Product,String> {
+public class ProductDaoImpl implements ProductDao{
 
+    private Session session;
     @Autowired
     private SessionFactory _sessionFactory;
 
     private Session getSession() {
-        return _sessionFactory.getCurrentSession();
+        session = _sessionFactory.getCurrentSession();
+        return session;
     }
 
     @Override
@@ -30,12 +32,14 @@ public class ProductDaoImpl implements ProductDao<Product,String> {
 
     @Override
     public void delete(Product product) {
+        session.close();
         getSession().delete(product);
         return;
     }
 
     @Override
     public Product getByCode(String code) {
+
         return (Product) getSession().createQuery("from Products where code = :code")
                 .setParameter("code", code)
                 .uniqueResult();
@@ -48,10 +52,12 @@ public class ProductDaoImpl implements ProductDao<Product,String> {
                 .uniqueResult();
     }
 
+
     @Override
     public Product getById(long id) {
-        return (Product) getSession().load(Product.class, id);
+        return getSession().<Product>load(Product.class, id);
     }
+
 
     @Override
     public void update(Product entity) {

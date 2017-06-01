@@ -12,27 +12,28 @@
 </head>
 <body>
 <h1>Save </h1>
-<form:form method="post" action="/admin/save">
+<form method="post" action="/admin/save">
+
     <table >
 
         <tr>
             <td>Login :</td>
-            <td><form:input path="login" /></td>
+            <td><input type="text" name="login" value=""></td>
         </tr>
         <tr>
             <td>Password :</td>
-            <td><form:input path="password" /></td>
+            <td><input type="password" name="password" value=""></td>
         </tr>
         <tr>
             <td>Fullname :</td>
-            <td><form:input path="fullname" /></td>
+            <td><input type="text" name="fullName" value=""/></td>
         </tr>
         <tr>
             <td> </td>
             <td><input type="submit" value="Enter" /></td>
         </tr>
     </table>
-</form:form>
+</form>
 
 
 </body>

@@ -16,6 +16,7 @@
             <td>${share.description}</td>
             <td>${share.startDate}</td>
             <td>${share.endDate}</td>
+
             <td><a href="edit/${share.id}">Edit</a></td>
             <td><a href="delete/${share.id}">Delete</a></td>
         </tr>
@@ -23,7 +24,7 @@
 </table>
 <br/>
 <a href="addShare.ftl">Add New Share</a>
-<a href="view.ftl">Return Start page</a>
+<a href="viewUser.ftl">Return Start page</a>
 
 </body>
 </html>

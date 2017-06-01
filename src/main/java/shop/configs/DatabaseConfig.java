@@ -5,21 +5,13 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import shop.controllers.AdminController;
-import shop.models.DAO.AdminDao;
-import shop.models.DAO.AdminDaoImpl;
+import shop.models.DAO.UserDaoImpl;
 import shop.models.DAO.ProductDaoImpl;
 import shop.models.DAO.ShareDaoImpl;
 import shop.service.*;
@@ -59,8 +51,10 @@ public class DatabaseConfig {
   @Value("${entitymanager.packagesToScan}")
   private String ENTITYMANAGER_PACKAGES_TO_SCAN;
 
+  @Value("${hibernate.current_session_context_class}")
+  private String HIBERNATE_CURRENT_SESSION_CONTEXT_CLASS;
 
-  
+
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -81,27 +75,20 @@ public class DatabaseConfig {
     hibernateProperties.put("hibernate.show_sql", HIBERNATE_SHOW_SQL);
     hibernateProperties.put("hibernate.hbm2ddl.auto", HIBERNATE_HBM2DDL_AUTO);
     sessionFactoryBean.setHibernateProperties(hibernateProperties);
+
+    if (sessionFactoryBean!=null){
+      System.out.println("создан!!!");
+    }else {
+      System.out.println("не создан");
+    }
     
     return sessionFactoryBean;
   }
 
 
-
-  /*@Bean(name = "internalResourceViewResolver")
-  public InternalResourceViewResolver setupViewResolver()  {
-    InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
-    resolver.setPrefix(PREFIX);
-    resolver.setSuffix(SUFFIX);
-    resolver.setViewClass(JstlView.class);
-
-    return resolver;
-  }*/
-
-
-
   @Bean(name = "adminService")
-  public AdminService getAdminService() {
-    return new AdminServiceImpl(new AdminDaoImpl());
+  public UserService getAdminService() {
+    return new UserServiceImpl(new UserDaoImpl());
   }
 
   @Bean(name = "productService")

@@ -1,5 +1,6 @@
 package shop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.models.DAO.ProductDao;
 import shop.models.entity.Product;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService<Product, String> {
 
+    @Autowired
     private ProductDao productDao;
 
     public  void setProductDao(ProductDao productDao) {

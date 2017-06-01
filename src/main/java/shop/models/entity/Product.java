@@ -3,10 +3,13 @@ package shop.models.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 @Entity
-@Table(name="Products")
+@Table(name="Product")
 public class Product {
 
     @Id
@@ -14,30 +17,24 @@ public class Product {
     private long id;
 
     @NotNull
-    @Size(min = 1, max = 80)
     private String title;
 
     @NotNull
-    @Size(min = 1, max = 80)
     private String code;
 
     @NotNull
-    @Size(min = 1, max = 80)
-    private double price;
+   private Integer price;
 
     @Lob
     @NotNull
-    @Size(min = 1)
     private byte[] image;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Size(min = 1, max = 40)
+    @Temporal(TemporalType.DATE)
     private Date createDate;
 
     @NotNull
-    @Size(min = 3, max = 50)
-    private boolean active;
+    private String active;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = true,
             cascade = CascadeType.ALL)
@@ -54,7 +51,7 @@ public class Product {
         this.title = title;
     }
 
-    public Product(String title, String code, double price, byte[] image, Date createDate, boolean active, Category category) {
+    public Product(String title, String code, Integer price, byte[] image, Date createDate, String active, Category category) {
         this.title = title;
         this.code = code;
         this.price = price;
@@ -88,16 +85,18 @@ public class Product {
         this.code = code;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(String pr) {
+
+        this.price = Integer.valueOf(pr);
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImage() {
+        String img = new String(image);
+        return img;
     }
 
     public void setImage(byte[] image) {
@@ -108,8 +107,17 @@ public class Product {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateDate(String date) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");//задаю формат даты
+
+        try {
+            this.createDate = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        this.createDate = createDate;
+
     }
 
     public Category getCategory() {
@@ -120,11 +128,11 @@ public class Product {
         this.category = category;
     }
 
-    public boolean isActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(String active) {
         this.active = active;
     }
 }

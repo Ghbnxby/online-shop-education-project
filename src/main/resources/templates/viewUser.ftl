@@ -5,13 +5,13 @@
     <title>View Page</title>
 </head>
 <body>
-<h1>Employees List</h1>
+<h1>User List</h1>
 <table border="2" width="70%" cellpadding="2">
     <tr><th>Id</th><th>FullName</th><th>Edit</th></tr>
-    <c:forEach var="admin" items="${admin}">
+    <c:forEach var="user" items="${user}">
         <tr>
-            <td>${admin.id}</td>
-            <td>${admin.fullname}</td>
+            <td>${user.id}</td>
+            <td>${user.fullname}</td>
 
             <td><a href="/admin/save${admin.id}">Edit</a></td>
 
@@ -22,20 +22,20 @@
 
 
 
-<form:form method="post" action="/product/view">
+<form method="post" action="/product/list">
 
     View list products
     <input type="submit" value="view" />
-</form:form>
+</form>
 
 <br/>
 <br/>
 
-<form:form method="post" action="/share/view">
+<form method="post" action="/share/view">
 
     View list shares
     <input type="submit" value="view" />
-</form:form>
+</form>
 
 
 </body>

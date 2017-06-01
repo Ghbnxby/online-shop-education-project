@@ -1,7 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+
 <html>
 <head>
     <title>Admin Page</title>
@@ -14,39 +11,46 @@
 </head>
 <body>
 <h1>Save </h1>
-<form:form method="post" action="/product/add">
+<form method="post" action="/product/save">
     <table >
 
         <tr>
             <td>Title :</td>
-            <td><form:input path="title" /></td>
+            <td><input type="text" name="title" value=""/></td>
         </tr>
         <tr>
             <td>Code :</td>
-            <td><form:input path="code" /></td>
+            <td><input type="text" name="code" value=""/></td>
         </tr>
         <tr>
             <td>Price :</td>
-            <td><form:input path="price" /></td>
+            <td><input type="text" name="price" value=""/></td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td><input name="image" type="file" value=""/></td>
         </tr>
         <tr>
             <td>CreateDate</td>
-            <td><input type="image" value="createDate" /></td>
+            <td><input name="createDate" type="text" value="" /></td>
         </tr>
         <tr>
-            <td>CreateDate</td>
-            <td><form:input path="createDate" /></td>
+            <td>Active</td>
+            <td><input type="text" name="active" value=""/></td>
         </tr>
+
         <tr>
-            <td>Aktive</td>
-            <td><form:input path="active" /></td>
+            <td>Category</td>
+            <td> <select name="category">
+                <option>tkanevye</option></td>
         </tr>
         <tr>
             <td> </td>
-            <td><input type="submit" value="Enter" /></td>
+
         </tr>
     </table>
-</form:form>
+    <td><input type="submit" value="Enter" /></td>
+</form>
 
 
 </body>

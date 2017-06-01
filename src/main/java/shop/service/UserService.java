@@ -3,7 +3,7 @@ package shop.service;
 /**
  * Created by toshiba_admin on 23.05.2017.
  */
-public interface AdminService<K,T> {
+public interface UserService<K,T> {
 
     void save(K entity);
 
