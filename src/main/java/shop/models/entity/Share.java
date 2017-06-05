@@ -3,6 +3,8 @@ package shop.models.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -14,21 +16,17 @@ public class Share {
     private long id;
 
     @NotNull
-    @Size(min = 3, max = 50)
     private String title;
 
     @NotNull
-    @Size(min = 3, max = 500)
     private String description;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Size(min = 1, max = 40)
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Size(min = 1, max = 40)
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     public Share() {}
@@ -74,15 +72,29 @@ public class Share {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");//задаю формат даты
+
+        try {
+            this.startDate = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");//задаю формат даты
+
+        try {
+            this.endDate = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }

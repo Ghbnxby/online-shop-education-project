@@ -23,7 +23,7 @@ public class Product {
     private String code;
 
     @NotNull
-   private Integer price;
+    private Integer price;
 
     @Lob
     @NotNull
@@ -116,7 +116,7 @@ public class Product {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        this.createDate = createDate;
+
 
     }
 

@@ -1,5 +1,6 @@
 package shop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.models.DAO.ShareDao;
 import shop.models.entity.Share;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class ShareServiceImpl implements ShareService<Share,Long> {
 
+    @Autowired
     private ShareDao shareDao;
 
     public void setShareDao(ShareDao shareDao) {

@@ -1,18 +1,20 @@
 package shop.models.DAO;
 
 
+import shop.models.entity.User;
 
+public interface UserDao {
 
-public interface UserDao<K,T> {
+    void save(User entity);
 
-    void save(K entity);
+     void delete(User entity);
 
-     void delete(K entity);
+     User getByLoginAndPassword (String login, String password);
 
-     K getByLoginAndPassword (String login, String password);
+     User getById(long id);
 
-     K getById(T id);
+     void update(User entity);
 
-     void update(K entity);
+     boolean listUser();
 
 }

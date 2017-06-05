@@ -1,16 +1,19 @@
 package shop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.models.DAO.UserDao;
 import shop.models.entity.User;
 @Service
 public class UserServiceImpl implements UserService<User, Long> {
 
+    @Autowired
     private UserDao userDao;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
+
     @Override
     public void save(User entity) {
 
@@ -44,4 +47,8 @@ public class UserServiceImpl implements UserService<User, Long> {
     public UserServiceImpl(UserDao userDao) {
 
         setUserDao(userDao);}
+
+    public boolean listUser(){
+       return this.userDao.listUser();
+    }
 }

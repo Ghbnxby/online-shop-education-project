@@ -12,13 +12,16 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ShareDaoImpl implements ShareDao<Share, Long> {
+public class ShareDaoImpl implements ShareDao {
+
+    private Session session;
 
     @Autowired
     private SessionFactory _sessionFactory;
 
     private Session getSession() {
-        return _sessionFactory.getCurrentSession();
+        session = _sessionFactory.getCurrentSession();
+        return session;
     }
 
 
@@ -30,14 +33,14 @@ public class ShareDaoImpl implements ShareDao<Share, Long> {
 
     @Override
     public void delete(Share share) {
-
+        session.close();
         getSession().delete(share);
         return;
     }
 
     @Override
-    public Share getById(Long id) {
-        return (Share) getSession().load(Share.class, id);
+    public Share getById(long id) {
+        return  getSession().<Share>load(Share.class, id);
     }
 
     @Override

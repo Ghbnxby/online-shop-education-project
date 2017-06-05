@@ -4,19 +4,26 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import shop.models.entity.Product;
 import shop.models.entity.User;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao<User, Long> {
+public class UserDaoImpl implements UserDao {
+
+    private Session session;
 
     @Autowired
     private SessionFactory _sessionFactory;
 
     private Session getSession() {
-        return _sessionFactory.getCurrentSession();
+
+        session = _sessionFactory.getCurrentSession();
+        return session;
+
     }
 
 
@@ -28,6 +35,7 @@ public class UserDaoImpl implements UserDao<User, Long> {
 
     @Override
     public void delete(User user) {
+        session.close();
         getSession().delete(user);
         return;
     }
@@ -40,8 +48,8 @@ public class UserDaoImpl implements UserDao<User, Long> {
     }
 
     @Override
-    public User getById(Long id) {
-        return (User) getSession().load(User.class, id);
+    public User getById(long id) {
+        return  getSession().<User>load(User.class, id);
     }
 
     @Override
@@ -49,5 +57,16 @@ public class UserDaoImpl implements UserDao<User, Long> {
         getSession().update(user);
         return;
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean listUser() {
+        List<User> users = getSession().createQuery("from User").list();
+        if (users.size()==0) {
+            return true;
+        } else {
+            return false; }
+
+          }
 
 }

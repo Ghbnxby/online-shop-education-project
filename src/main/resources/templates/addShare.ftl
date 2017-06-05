@@ -1,44 +1,33 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 <html>
 <head>
-    <title>Admin Page</title>
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-        .tg .tg-4eph{background-color:#f9f9f9}
-    </style>
+    <title>Share</title>
+
 </head>
 <body>
 <h1>Save </h1>
-<form:form method="post" action="/share/add">
+<form method="post" action="/share/save">
     <table >
 
         <tr>
             <td>Title :</td>
-            <td><form:input path="title" /></td>
+            <td><input type="text" name="title" value=""/></td>
         </tr>
         <tr>
-            <td>Code :</td>
-            <td><form:input path="description" /></td>
+            <td>Description :</td>
+            <td><input type="text" name="description" value=""/></td>
         </tr>
         <tr>
-            <td>Price :</td>
-            <td><form:input path="startDate" /></td>
+            <td>Start Date :</td>
+            <td><input type="text" name="startDate" value=""/></td>
         </tr>
         <tr>
-            <td>CreateDate</td>
-            <td><form:input path="endDate" /></td>
+            <td>End Date</td>
+            <td><input type="text" name="endDate" value=""/></td>
         </tr>
-        <tr>
-            <td> </td>
-            <td><input type="submit" value="Enter" /></td>
-        </tr>
+
     </table>
-</form:form>
+    <td><input type="submit" value="Enter" /></td>
+</form>
 
 
 </body>

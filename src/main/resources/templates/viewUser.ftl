@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 
-<html>
-<head>
-    <title>View Page</title>
-</head>
+<html lang="en">
+
 <body>
-<h1>User List</h1>
+<form method="post" action="/user/update?id=${user.id}">
 <table border="2" width="70%" cellpadding="2">
-    <tr><th>Id</th><th>FullName</th><th>Edit</th></tr>
-    <c:forEach var="user" items="${user}">
+    <tr><th></th><th>new change</th></tr>
+
         <tr>
+            <td>id</td>
             <td>${user.id}</td>
-            <td>${user.fullname}</td>
+            </tr><br/>
+        <tr>
+        <tr>
+            <td>Login</td>
+            <td><input type="text" name="login" value="${user.login}"/></td>
+            </tr><br/>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password" value="${user.password}"/></td>
+            </tr><br/>
+        <tr>
+            <td>Full Name</td>
+            <td><input type="text" name="fullname" value="${user.fullname}"/></td>
+        </tr><br/>
 
-            <td><a href="/admin/save${admin.id}">Edit</a></td>
-
-        </tr>
-    </c:forEach>
+        <br/>
 </table>
-
-
-
-
-<form method="post" action="/product/list">
-
-    View list products
-    <input type="submit" value="view" />
-</form>
+    <td><input type="submit" value="Update" /></td>
+    </form>
 
 <br/>
-<br/>
 
-<form method="post" action="/share/view">
-
-    View list shares
-    <input type="submit" value="view" />
-</form>
-
+<a href="/user/cabinet">Return</a>
 
 </body>
+
+
 </html>

@@ -56,44 +56,70 @@ public class UserController {
         return "start";
     }
 
-    @RequestMapping("/loginUser")
+    /*  **********************        USER            ****************************/
+
+    @RequestMapping({"/loginUser", "/user/loginUser"})
     public String login() {
 
         return "loginUser";
     }
-    @RequestMapping("/saveUser")
+    @RequestMapping({"/saveUser","/user/saveUser"})
     public String save() {
 
         return "saveUser";
     }
 
-    @RequestMapping("/user/view")
-    public ModelAndView userView(Long idUser) {
-        User user = (User)this.userService.getById(idUser);
-        return new ModelAndView("viewUser", "user", user);
-    }
+
 
     @RequestMapping("/user/save")
-    public ModelAndView saveUser(@ModelAttribute("user") User user) {
+    public ModelAndView saveUser(@ModelAttribute("user") User user, Map<String, Object> model) {
 
-        if (user.getId() == 0) {
-            //new person, add it
+
+        if (this.userService.listUser()) {
             this.userService.save(user);
-        } else {
-            //existing person, call update
-            this.userService.update(user);
+            user = (User) this.userService.getByLoginAndPassword(user.getLogin(), user.getPassword());
+            return  new ModelAndView("cabinetUser", "user", user);
         }
-
-        return new ModelAndView("viewUser", "user", user);
+        else {
+            message = "Администратор уже зарегистрирован, войдите в аккаунт";
+            model.put("time", new Date());
+            model.put("message", this.message);
+            return new ModelAndView("start", "model", model);
+        }
 
     }
 
-    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    @RequestMapping("/user/login")
     public ModelAndView loginAdmin(@ModelAttribute("user") User user) {
 
-        this.userService.getByLoginAndPassword(user.getLogin(), user.getPassword());
+       user = (User) this.userService.getByLoginAndPassword(user.getLogin(), user.getPassword());
 
+        return  new ModelAndView("cabinetUser", "user", user);
+
+    }
+
+
+    /*  Open data User in viewUser.ftl     */
+    @RequestMapping("/user/view")
+    public ModelAndView viewUser(long id) {
+        User user = (User) this.userService.getById(id);
         return new ModelAndView("viewUser", "user", user);
+    }
+
+    @RequestMapping("/user/cabinet")
+    public ModelAndView cabinetUser(@ModelAttribute("user") User user) {
+
+         user = (User) this.userService.getById(user.getId());
+        return new ModelAndView("cabinetUser", "user", user);
+    }
+
+    @RequestMapping("/user/update")
+    public ModelAndView updateUser(@ModelAttribute("user") User user, long id) {
+        user.setId(id);
+        this.userService.update(user);
+         user = (User) this.userService.getById(id);
+
+        return  new ModelAndView("cabinetUser", "user", user);
 
     }
 
@@ -155,17 +181,55 @@ public class UserController {
     /*       *******************      SHARE      ***************************/
 
 
-    @RequestMapping(value = "/share/view", method = RequestMethod.POST)
-    public ModelAndView listShare() {
+    /*  Open data Share in viewShare.ftl     */
+    @RequestMapping("/share/view")
+    public ModelAndView viewShare(long id) {
+        Share share = (Share) this.shareService.getById(id);
+        return new ModelAndView("viewShare", "share", share);
+    }
+
+    /* This command delete Share by Id and redirect on listShares */
+    @RequestMapping("/share/delete")
+    public String deleteShare(long id) {
+        Share share = (Share) this.shareService.getById(id);
+        this.productService.delete(share);
+        return "redirect:/share/list";
+    }
+
+    /*  Getting Share's list and view  */
+    @RequestMapping("/share/list")
+    public ModelAndView listShares() {
+
         List<Share> list = shareService.listShares();
         return new ModelAndView("listShares", "list", list);
     }
 
-    @RequestMapping(value = "/share/add", method = RequestMethod.POST)
-    public ModelAndView saveShare(@ModelAttribute("share") Share share) {
-        productService.save(share);
-        return new ModelAndView("addShare", "share", share);
+    /*  Update Share and redirect on listShares */
+    @RequestMapping("/share/edit")
+    public String editShare(@ModelAttribute("share") Share share, long id) {
+        share.setId(id);
+        this.shareService.update(share);
+        return "redirect:/share/list";
     }
 
+    /*  Open page addShare.ftl for add to product   */
+    @RequestMapping(value = "/share/add")
+    public String addShare() {
+
+        return "addShare";
+    }
+
+    /*   This command add new Share in database  */
+    @RequestMapping(value = "/share/save")
+    public String saveShare(@ModelAttribute("share") Share share) {
+        if (share.getId() == 0) {
+            //new person, add it
+            this.shareService.save(share);
+        } else {
+            //existing person, call update
+            this.shareService.update(share);
+        }
+        return "redirect:/share/list";
+    }
 
 }

@@ -2,7 +2,6 @@ package shop.models.DAO;
 
 import shop.models.entity.Product;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 

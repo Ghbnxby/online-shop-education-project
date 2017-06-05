@@ -1,15 +1,17 @@
 package shop.models.DAO;
 
 
+import shop.models.entity.Share;
+
 import java.util.List;
 
-public interface ShareDao<K,T> {
-    void save(K entity);
+public interface ShareDao {
+    void save(Share entity);
 
-    void delete(K entity);
+    void delete(Share entity);
 
-    K getById(T id);
+    Share getById(long id);
 
-    void update(K entity);
-    List<K> listShare();
+    void update(Share entity);
+    List<Share> listShare();
 }
