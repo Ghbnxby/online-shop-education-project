@@ -1,5 +1,6 @@
 package shop.service;
 
+import shop.models.entity.Category;
 import shop.models.entity.Product;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface CategoryService<K,T> {
     void update(K entity);
 
     List<Product> getProductsbyCategory(K entity);
+
+    List<K> listCategorys();
 }

@@ -36,6 +36,10 @@ public class UserServiceImpl implements UserService<User, Long> {
         return (User) this.userDao.getById(id);
     }
 
+    public User getUserByLogin(String login) {
+        return (User) this.userDao.getUserByLogin(login);
+    }
+
     @Override
     public void update(User entity) {
 

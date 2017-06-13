@@ -12,13 +12,15 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class CategoryDaoImpl implements CategoryDao<Category, Long> {
+public class CategoryDaoImpl implements CategoryDao {
 
+    private Session session;
     @Autowired
     private SessionFactory _sessionFactory;
 
     private Session getSession() {
-        return _sessionFactory.getCurrentSession();
+        session = _sessionFactory.getCurrentSession();
+        return session;
     }
 
 
@@ -30,14 +32,14 @@ public class CategoryDaoImpl implements CategoryDao<Category, Long> {
 
     @Override
     public void delete(Category category) {
-
+        session.close();
         getSession().delete(category);
         return;
     }
 
     @Override
-    public Category getById(Long id) {
-        return (Category) getSession().load(Category.class, id);
+    public Category getById(long id) {
+        return  getSession().<Category>load(Category.class, id);
     }
 
     @Override
@@ -54,4 +56,13 @@ public class CategoryDaoImpl implements CategoryDao<Category, Long> {
                 .setParameter("category", category).list();
 
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Category> listCategorys() {
+
+        return  getSession().createQuery("from Category").list();
+
+    }
+
 }

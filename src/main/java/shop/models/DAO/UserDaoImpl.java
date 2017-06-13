@@ -52,6 +52,11 @@ public class UserDaoImpl implements UserDao {
         return  getSession().<User>load(User.class, id);
     }
 
+    public User getUserByLogin(String login) {
+        return (User) getSession().createQuery("from User where login = :login")
+                .setParameter("login", login)
+                .uniqueResult();
+    }
     @Override
     public void update(User user) {
         getSession().update(user);

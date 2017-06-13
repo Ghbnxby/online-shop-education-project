@@ -1,0 +1,10 @@
+body {
+    background-color: #FFCC66;
+    background-image: url("static/img/tulpan.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1 {
+    color: coral;
+    background-color: honeydew;
+}

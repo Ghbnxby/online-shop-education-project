@@ -36,9 +36,11 @@
 
         <tr>
             <td>Category</td>
+<#list list as category>
             <td> <select name="category">
-                <option>tkanevye</option></td>
+                <option>${category.title}</option></td>
         </tr>
+</#list>
         <tr>
             <td> </td>
 

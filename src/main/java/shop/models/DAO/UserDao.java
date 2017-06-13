@@ -13,6 +13,9 @@ public interface UserDao {
 
      User getById(long id);
 
+     User getUserByLogin(String login);
+
+
      void update(User entity);
 
      boolean listUser();

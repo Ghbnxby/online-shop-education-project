@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import shop.models.DAO.CategoryDaoImpl;
 import shop.models.DAO.UserDaoImpl;
 import shop.models.DAO.ProductDaoImpl;
 import shop.models.DAO.ShareDaoImpl;
@@ -86,8 +87,8 @@ public class DatabaseConfig {
   }
 
 
-  @Bean(name = "adminService")
-  public UserService getAdminService() {
+  @Bean(name = "userService")
+  public UserService getUserService() {
     return new UserServiceImpl(new UserDaoImpl());
   }
 
@@ -100,5 +101,13 @@ public class DatabaseConfig {
   public ShareService getShareService() {
     return new ShareServiceImpl(new ShareDaoImpl());
   }
+
+  @Bean(name = "categoryService")
+  public CategoryService getCategoryService() {
+    return new CategoryServiceImpl(new CategoryDaoImpl());
+  }
+
+
+
 
 } // class DatabaseConfig

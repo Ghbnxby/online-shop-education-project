@@ -13,6 +13,8 @@ public interface UserService<K,T> {
 
     K getById(T id);
 
+    K getUserByLogin(String login);
+
     void update(K entity);
 
     boolean listUser();

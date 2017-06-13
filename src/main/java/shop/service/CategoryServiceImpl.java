@@ -1,5 +1,6 @@
 package shop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.models.DAO.CategoryDao;
 import shop.models.entity.Category;
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService<Category, Long> {
 
+    @Autowired
     private CategoryDao categoryDao;
 
     public void setCategoryDao(CategoryDao categoryDao) {
@@ -44,4 +46,15 @@ public class CategoryServiceImpl implements CategoryService<Category, Long> {
     public List<Product> getProductsbyCategory(Category entity) {
         return (List<Product>) this.categoryDao.getProductsbyCategory(entity);
     }
+
+    @Override
+    public List<Category> listCategorys() {
+        return (List<Category>) this.categoryDao.listCategorys();
+    }
+
+    public CategoryServiceImpl(){}
+    public CategoryServiceImpl(CategoryDao categoryDao) {
+        setCategoryDao(categoryDao);
+    }
+
 }
